@@ -1,8 +1,8 @@
 {
-  "name": "directory",
-  "version": "0.0.0",
+  "name": "uci-directory-search",
+  "version": "0.0.1",
   "description": "Search public UCI directory/ldap for employee information -- intended for employees to find other employees info.",
-  "private": true,
+  "private": false,
   "bin": {
     "directory": "./bin/directory"
   },
