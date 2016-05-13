@@ -32,14 +32,4 @@ describe('directory bin', function () {
       done();
     });
   });
-
-  it('should return error on unknown command', function (done) {
-    this.timeout(4000);
-
-    exec(cmd + 'junkcmd', function (error, stdout, stderr) {
-      assert(error);
-      assert.equal(error.code, 1);
-      done();
-    });
-  });
 });
