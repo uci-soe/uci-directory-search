@@ -26,14 +26,16 @@ program
   .option('-n, --name <value>', 'Name of person. single word or double-quote(") surrounded text. Same as  using name in non-tag usage of this command. explicit -n or --name will override non-tag usage', null)
   .option('-i, --ucinetid <value>', 'Search by UCINetID', null)
   .option('-c, --campusid <n>', 'Search by Campus ID', parsers.number, null)
-  .option('-p, --phone <number>', 'Phone number in x49999, 49999, 9999, or standard 7 or 10 digit formats', parsers.phone, null)
-  .option('-r, --room <number>', 'Room number in format <TBD??>', parsers.room, null)
-  .option('-d, --department <value>', 'Department to which people belong', parsers.ucfirst, null)
+  .option('-m, --email <value>', 'Search by Email Address', null)
+  .option('-p, --phone <number>', 'Phone number in x49999, 49999, 9999, or standard 7, 10, or 11 digit formats', parsers.phone, null)
+  // .option('-r, --room <number>', 'Room number in format <TBD??>', null)
+  .option('-D, --department <value>', 'Department to which people belong', parsers.ucfirst, null)
   .option('-e, --employee', 'Staff and Faculty only. No Students', false)
-  .option('-D, --delivery-point <value>', 'Delivery point type of results, (gmail|o365|es|other) (other = anything but gmail, o365, or es)', /^(gmail|o365|es|other)$/i, null)
+  .option('-P, --delivery-point <value>', 'Delivery point type of results, (gmail|o365|es|hs|exchange|other) (other = anything but gmail, o365, exchange, hs, or es)', /^(gmail|o365|es|exchange|hs|other)$/i, null)
 
   // outputs
-  .option('-P, --pretty-text', 'Display as Pretty Text. Default: true', true)
+  // .option('-P, --pretty-text', 'Display as Pretty Text. Default: true', true)
+  .option('--raw', 'Display as pretty JSON with LDAP headers', false)
   .option('-j, --json', 'Display as JSON instead of pretty text', false)
   .option('-J, --json-pretty', 'Display as JSON with pretty spacing instead of pretty text', false)
   .option('-C, --csv', 'Display as CSV instead of pretty text', false)
@@ -55,13 +57,15 @@ var options = {
   name:          program.name || program.args.join(' '),
   ucinetid:      program.ucinetid,
   campusid:      program.campusid,
+  email:         program.email,
   phone:         program.phone,
-  room:          program.room,
+  // room:          program.room,
   department:    program.department,
   employee:      program.employee,
   deliveryPoint: program.deliveryPoint,
   output:        {
     csv:        program.csv,
+    raw:        program.raw,
     json:       program.json,
     jsonPretty: program.jsonPretty,
     csvHeaders: program.csvHeaders,
@@ -76,14 +80,15 @@ if (
   !options.name
   && !options.ucinetid
   && !options.campusid
+  && !options.email
   && !options.phone
-  && !options.room
+  // && !options.room
   && !options.department
   && !options.employee
   && !options.deliveryPoint
 ) {
   program.log.error('No search criteria given.');
-  program.log.error('Must include name, ucinetid, campusid, phone, room, department, employee, deliveryPoint');
+  program.log.error('Must include name, ucinetid, campusid, phone, email, department, employee, deliveryPoint');
   program.outputHelp();
   process.exit(1);
 
@@ -95,7 +100,7 @@ if (
 
     } else {
 
-      if (options.output.jsonPretty) { // todo: here I am: not working
+      if (options.output.raw || options.output.jsonPretty) { // todo: here I am: not working
         done(JSON.stringify(res, null, 2));
       } else if (options.output.json) {
         done(JSON.stringify(res));
