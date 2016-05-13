@@ -1,0 +1,31 @@
+{
+  "name": "directory",
+  "version": "0.0.0",
+  "description": "Search public UCI directory/ldap for employee information -- intended for employees to find other employees info.",
+  "private": true,
+  "bin": {
+    "directory": "./bin/directory"
+  },
+  "scripts": {
+    "test": "mocha -R spec"
+  },
+  "author": {
+    "name": "Rhett Lowe",
+    "email": "rng2ml@gmail.com",
+    "url": "https://github.com/rhettl"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/uci-soe/uci-directory-search"
+  },
+  "license": "MIT",
+  "bugs": "https://github.com/uci-soe/uci-directory-search/issues",
+  "dependencies": {
+    "autocmdr": "~0.0.7",
+    "commander": "^2.9.0",
+    "csv-stringify": "^1.0.4",
+    "uci-ldap-search": "^0.1.5",
+    "chalk": "latest"
+  },
+  "devDependencies": {}
+}

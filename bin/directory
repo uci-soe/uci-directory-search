@@ -1,0 +1,114 @@
+#!/usr/bin/env node
+'use strict';
+
+var program      = require('commander');
+var search       = require('../lib/search');
+var csvStringify = require('csv-stringify');
+var logErr       = require('../lib/logErr');
+var parsers      = require('../lib/parsers');
+var prettyFormat      = require('../lib/prettyFormat');
+
+require('autocmdr/lib/logger')(program);
+require('autocmdr/lib/package')(program);
+
+search.setLogger(program.log);
+
+function done (out) {
+  process.stdout.write(out + (/\n$/m.test(out) ? '' : '\n'));
+  process.exit(0);
+}
+
+program
+  .usage('[options] [name...]')
+  // .option('-n, --name <name...>')
+
+  // search constraints. all constraints are &&
+  .option('-n, --name <value>', 'Name of person. single word or double-quote(") surrounded text. Same as  using name in non-tag usage of this command. explicit -n or --name will override non-tag usage', null)
+  .option('-i, --ucinetid <value>', 'Search by UCINetID', null)
+  .option('-c, --campusid <n>', 'Search by Campus ID', parsers.number, null)
+  .option('-p, --phone <number>', 'Phone number in x49999, 49999, 9999, or standard 7 or 10 digit formats', parsers.phone, null)
+  .option('-r, --room <number>', 'Room number in format <TBD??>', parsers.room, null)
+  .option('-d, --department <value>', 'Department to which people belong', parsers.ucfirst, null)
+  .option('-e, --employee', 'Staff and Faculty only. No Students', false)
+  .option('-D, --delivery-point <value>', 'Delivery point type of results, (gmail|o365|es|other) (other = anything but gmail, o365, or es)', /^(gmail|o365|es|other)$/i, null)
+
+  // outputs
+  .option('-P, --pretty-text', 'Display as Pretty Text. Default: true', true)
+  .option('-j, --json', 'Display as JSON instead of pretty text', false)
+  .option('-J, --json-pretty', 'Display as JSON with pretty spacing instead of pretty text', false)
+  .option('-C, --csv', 'Display as CSV instead of pretty text', false)
+  .option('-H, --csv-headers', 'Display headers if CSV. Default: True')
+
+  // results set
+  .option('-L, --limit <n>', 'Limit results to <n>', null)
+  .option('-S, --skip <n>', 'Skip <n> results', parsers.number, 0)
+
+;
+
+program
+  .parse(process.argv);
+
+// console.log(program.name);
+
+// --name overrides name
+var options = {
+  name:          program.name || program.args.join(' '),
+  ucinetid:      program.ucinetid,
+  campusid:      program.campusid,
+  phone:         program.phone,
+  room:          program.room,
+  department:    program.department,
+  employee:      program.employee,
+  deliveryPoint: program.deliveryPoint,
+  output:        {
+    csv:        program.csv,
+    json:       program.json,
+    jsonPretty: program.jsonPretty,
+    csvHeaders: program.csvHeaders,
+    limit:      program.limit,
+    skip:       program.skip
+  }
+};
+program.log.debug(JSON.stringify(options, null, 2));
+
+
+if (
+  !options.name
+  && !options.ucinetid
+  && !options.campusid
+  && !options.phone
+  && !options.room
+  && !options.department
+  && !options.employee
+  && !options.deliveryPoint
+) {
+  program.log.error('No search criteria given.');
+  program.log.error('Must include name, ucinetid, campusid, phone, room, department, employee, deliveryPoint');
+  program.outputHelp();
+  process.exit(1);
+
+} else {
+
+  search(options, function (err, res) {
+    if (err) {
+      return logErr(err, program.log.error);
+
+    } else {
+
+      if (options.output.jsonPretty) { // todo: here I am: not working
+        done(JSON.stringify(res, null, 2));
+      } else if (options.output.json) {
+        done(JSON.stringify(res));
+      } else if (options.output.csv) {
+        csvStringify(res, {header: options.output.csvHeaders}, (err, csvStr) => {
+          if (err) {
+            return logErr(err, program.log.error);
+          }
+          done(csvStr);
+        });
+      } else { // pretty print
+        done(prettyFormat(res));
+      }
+    }
+  });
+}
