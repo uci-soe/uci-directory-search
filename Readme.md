@@ -27,6 +27,7 @@ $ directory --help
     -n, --name <value>            Name of person. single word or double-quote(") surrounded text. Same as  using name in non-tag usage of this command. explicit -n or --name will override non-tag usage
     -i, --ucinetid <value>        Search by UCINetID
     -c, --campusid <n>            Search by Campus ID
+    -t, --title <value>           Search by Job Title
     -m, --email <value>           Search by Email Address
     -p, --phone <number>          Phone number in x49999, 49999, 9999, or standard 7, 10, or 11 digit formats
     -D, --department <value>      Department to which people belong

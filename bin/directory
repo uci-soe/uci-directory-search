@@ -26,6 +26,7 @@ program
   .option('-n, --name <value>', 'Name of person. single word or double-quote(") surrounded text. Same as  using name in non-tag usage of this command. explicit -n or --name will override non-tag usage', null)
   .option('-i, --ucinetid <value>', 'Search by UCINetID', null)
   .option('-c, --campusid <n>', 'Search by Campus ID', parsers.number, null)
+  .option('-t, --title <value>', 'Search by Job Title', null)
   .option('-m, --email <value>', 'Search by Email Address', null)
   .option('-p, --phone <number>', 'Phone number in x49999, 49999, 9999, or standard 7, 10, or 11 digit formats', parsers.phone, null)
   // .option('-r, --room <number>', 'Room number in format <TBD??>', null)
@@ -58,6 +59,7 @@ var options = {
   ucinetid:      program.ucinetid,
   campusid:      program.campusid,
   email:         program.email,
+  title:         program.title,
   phone:         program.phone,
   // room:          program.room,
   department:    program.department,
@@ -81,6 +83,7 @@ if (
   && !options.ucinetid
   && !options.campusid
   && !options.email
+  && !options.title
   && !options.phone
   // && !options.room
   && !options.department
@@ -88,7 +91,7 @@ if (
   && !options.deliveryPoint
 ) {
   program.log.error('No search criteria given.');
-  program.log.error('Must include name, ucinetid, campusid, phone, email, department, employee, deliveryPoint');
+  program.log.error('Must include name, ucinetid, campusid, phone, email, title, department, employee, deliveryPoint');
   program.outputHelp();
   process.exit(1);
 
