@@ -7,7 +7,9 @@
     "directory": "./bin/directory"
   },
   "scripts": {
-    "test": "mocha -R spec"
+    "test": "mocha -R spec",
+    "publish-please": "publish-please",
+    "prepublish": "publish-please guard"
   },
   "author": {
     "name": "Rhett Lowe",
@@ -28,6 +30,7 @@
     "chalk": "latest"
   },
   "devDependencies": {
+    "csv": "^1.1.0",
     "mocha": "^2.5.3"
   }
 }
