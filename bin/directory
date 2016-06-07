@@ -3,7 +3,7 @@
 
 var program      = require('commander');
 var search       = require('../lib/search');
-var csvStringify = require('csv-stringify');
+var csvStringify = require('csv').stringify;
 var logErr       = require('../lib/logErr');
 var parsers      = require('../lib/parsers');
 var prettyFormat      = require('../lib/prettyFormat');
@@ -16,6 +16,16 @@ search.setLogger(program.log);
 function done (out) {
   process.stdout.write(out + (/\n$/m.test(out) ? '' : '\n'));
   process.exit(0);
+}
+
+function parseDeliveryPoint (point) {
+  if (/^(gmail|o365|es|exchange|hs|other)$/i.test(point)) {
+    return point;
+  } else {
+    program.log.error(`Delivery Point, "${point}", is not valid option.`);
+    program.log.error('Must be one of [gmail|o365|es|exchange|hs|other].');
+    process.exit(1);
+  }
 }
 
 program
@@ -32,7 +42,7 @@ program
   // .option('-r, --room <number>', 'Room number in format <TBD??>', null)
   .option('-D, --department <value>', 'Department to which people belong', parsers.ucfirst, null)
   .option('-e, --employee', 'Staff and Faculty only. No Students', false)
-  .option('-P, --delivery-point <value>', 'Delivery point type of results, (gmail|o365|es|hs|exchange|other) (other = anything but gmail, o365, exchange, hs, or es)', /^(gmail|o365|es|exchange|hs|other)$/i, null)
+  .option('-P, --delivery-point <value>', 'Delivery point type of results, (gmail|o365|es|hs|exchange|other) (other = anything but gmail, o365, exchange, hs, or es)', parseDeliveryPoint, null)
 
   // outputs
   // .option('-P, --pretty-text', 'Display as Pretty Text. Default: true', true)
