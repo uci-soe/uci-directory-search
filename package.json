@@ -27,5 +27,7 @@
     "uci-ldap-search": "^0.1.5",
     "chalk": "latest"
   },
-  "devDependencies": {}
+  "devDependencies": {
+    "mocha": "^2.5.3"
+  }
 }
