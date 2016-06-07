@@ -24,13 +24,12 @@
   "bugs": "https://github.com/uci-soe/uci-directory-search/issues",
   "dependencies": {
     "autocmdr": "~0.0.7",
+    "chalk": "latest",
     "commander": "^2.9.0",
-    "csv-stringify": "^1.0.4",
-    "uci-ldap-search": "^0.1.5",
-    "chalk": "latest"
+    "csv": "^1.1.0",
+    "uci-ldap-search": "^0.1.5"
   },
   "devDependencies": {
-    "csv": "^1.1.0",
     "mocha": "^2.5.3"
   }
 }
