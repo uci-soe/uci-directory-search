@@ -4,15 +4,17 @@
 
 Search public UCI directory/ldap for employee information -- intended for employees to find other employees info.
 
+## Dependancies
+- NodeJS -- installs Node Package Manager (npm) -- installation instructions at [nodejs.org](http://nodejs.org/)
+
+
 ## Install
-
 To install directory from npm, run:
-
 ```
 $ npm install -g uci-directory-search
 ```
 
-Update from `0.0.1 => 1.x`
+To force update from `0.0.1 => 1.x`
 ```
 $ npm install -g uci-directory-search@latest
 ```
