@@ -51,7 +51,7 @@ $ directory --help
 
 ## Todo
 
-- [ ] Make Tests
+- [x] Make Tests
 - [ ] Add to Travis
 - [ ] Add search by Room
 
