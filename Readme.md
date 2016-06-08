@@ -4,13 +4,20 @@
 
 Search public UCI directory/ldap for employee information -- intended for employees to find other employees info.
 
-## Usage
+## Install
 
 To install directory from npm, run:
 
 ```
 $ npm install -g uci-directory-search
 ```
+
+Update from `0.0.1 => 1.x`
+```
+$ npm install -g uci-directory-search@latest
+```
+
+## Usage
 
 ```
 $ directory --help
