@@ -30,6 +30,7 @@
     "uci-ldap-search": "^0.1.5"
   },
   "devDependencies": {
-    "mocha": "^2.5.3"
+    "mocha": "^2.5.3",
+    "publish-please": "^2.1.4"
   }
 }
