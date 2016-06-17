@@ -13,14 +13,12 @@ var pkg = require('../package.json');
 require('autocmdr/lib/logger')(program);
 require('autocmdr/lib/package')(program);
 
-
-pkg.version = '0.0.1';
-var notifier = updateNotifier({pkg: pkg, updateCheckInterval: 1});
+var notifier = updateNotifier({pkg: pkg});
 
 search.setLogger(program.log);
 
 function done (out) {
-  notifier.notify();
+  notifier.notify({defer: false});
   process.stdout.write(out + (/\n$/m.test(out) ? '' : '\n'));
   process.exit(0);
 }
