@@ -33,7 +33,7 @@ describe('directory search', function () {
       done();
     });
   });
-  
+
   it('should filter by name', function (done) {
     this.timeout(4000);
 
@@ -428,7 +428,7 @@ describe('directory search', function () {
   });
 
   it('should limit returned results', function (done) {
-    this.timeout(4000);
+    this.timeout(6000);
 
     cmd += ` --json --limit 1 --phone 5118`;
     exec(cmd, function (error, stdout, stderr) {
@@ -441,20 +441,19 @@ describe('directory search', function () {
     });
   });
   it('should skip returned results', function (done) {
-    this.timeout(4000);
+    this.timeout(6000);
 
-    cmd += ` --json --phone 5118`;
+    cmd += ` --json --phone 5118 --limit 5`;
     exec(cmd, function (error, full, stderr) {
       assert(!error);
 
       let fullData = JSON.parse(full);
 
-      cmd += ` --limit 1 --skip 1`;
+      cmd += ` --skip 1`;
       exec(cmd, function (error, part, stderr) {
         assert(!error);
 
         let partialData = JSON.parse(part);
-        assert.equal(1, partialData.length, 'should only have one entry');
         assert.deepStrictEqual(fullData[1], partialData[0], 'should only have one entry');
 
         done();
