@@ -27,7 +27,8 @@
     "chalk": "latest",
     "commander": "^2.9.0",
     "csv": "^1.1.0",
-    "uci-ldap-search": "^0.1.5"
+    "uci-ldap-search": "^0.1.5",
+    "update-notifier": "^1.0.0"
   },
   "devDependencies": {
     "mocha": "^2.5.3",

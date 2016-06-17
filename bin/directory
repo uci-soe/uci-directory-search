@@ -7,13 +7,20 @@ var csvStringify = require('csv').stringify;
 var logErr       = require('../lib/logErr');
 var parsers      = require('../lib/parsers');
 var prettyFormat      = require('../lib/prettyFormat');
+var updateNotifier = require('update-notifier');
+var pkg = require('../package.json');
 
 require('autocmdr/lib/logger')(program);
 require('autocmdr/lib/package')(program);
 
+
+pkg.version = '0.0.1';
+var notifier = updateNotifier({pkg: pkg, updateCheckInterval: 1});
+
 search.setLogger(program.log);
 
 function done (out) {
+  notifier.notify();
   process.stdout.write(out + (/\n$/m.test(out) ? '' : '\n'));
   process.exit(0);
 }
