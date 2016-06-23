@@ -16,9 +16,9 @@ require('autocmdr/lib/package')(program);
 var notifier = updateNotifier({pkg: pkg});
 
 search.setLogger(program.log);
+notifier.notify();
 
 function done (out) {
-  notifier.notify({defer: false});
   process.stdout.write(out + (/\n$/m.test(out) ? '' : '\n'));
   process.exit(0);
 }
@@ -66,7 +66,6 @@ program
 program
   .parse(process.argv);
 
-// console.log(program.name);
 
 // --name overrides name
 var options = {
