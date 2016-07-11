@@ -1,7 +1,5 @@
 #directory
 
-## Description
-
 Search public UCI directory/ldap for employee information -- intended for employees to find other employees info.
 
 ## Dependancies
@@ -59,7 +57,6 @@ You can put aliases into your `~/.bashrc` or `~/.aliases` file, if you have `~/.
 
 ## Todo
 
-- [x] Make Tests
 - [ ] Add to Travis
 - [ ] Add search by Room
 
