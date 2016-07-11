@@ -51,6 +51,12 @@ $ directory --help
     -S, --skip <n>                Skip <n> results
 ```
 
+## Optional Aliases
+You can put aliases into your `~/.bashrc` or `~/.aliases` file, if you have `~/.aliases` references in `~./bashrc` via `source ~/.aliases` or equivilant. 
+
+- `alias d=directory` :arrow_right: allows for quicker access ex: `d rhett` or `d rhett -e` will produce people with rhett in their names
+- `alias di="directory -i"` :arrow_right: does a UCINetID because I often know the NetID and can look that up faster withthis shortcut. ex: `di rhett` will bring up Rhett Lowe, `di rhe*` produces 23 results at time of this commit.
+
 ## Todo
 
 - [x] Make Tests
