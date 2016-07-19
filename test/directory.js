@@ -452,7 +452,7 @@ describe('directory search', function () {
   it('should limit returned results', function (done) {
     this.timeout(6000);
 
-    cmd += ` --json --limit 1 --phone 5118`;
+    cmd += ` --json --limit 1 --name rhett`;
     exec(cmd, function (error, stdout, stderr) {
       assert(!error);
 
@@ -465,7 +465,7 @@ describe('directory search', function () {
   it('should skip returned results', function (done) {
     this.timeout(6000);
 
-    cmd += ` --json --phone 5118 --limit 5`;
+    cmd += ` --json --name rhett --limit 2`;
     exec(cmd, function (error, full, stderr) {
       assert(!error);
 
