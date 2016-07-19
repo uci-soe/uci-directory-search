@@ -5,6 +5,24 @@ Search public UCI directory/ldap for employee information -- intended for employ
 ## Dependancies
 - NodeJS -- installs Node Package Manager (npm) -- installation instructions at [nodejs.org](http://nodejs.org/)
 
+### Example 
+```
+$ directory rhett lowe
+Found 1 result:
+  Result #1:
+    Name: Rhett Norman Lowe
+    Is Employee
+    Is NOT Student
+    Title: Application Developer
+    Department: Education
+    Phone #: (949) 824-8564
+    Fax #: (949) 824-9103
+    UCINetID: rhett
+    Email Address: rhett@uci.edu
+    Email Alias: n/a
+    Email Delivery Point: rhett@gmailbox.es.uci.edu
+    Address: 2040 Education, Irvine, CA 92697-5500
+```
 
 ## Install
 To install directory from npm, run:
