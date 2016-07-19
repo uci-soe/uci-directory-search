@@ -38,7 +38,8 @@ $ directory --help
     -m, --email <value>           Search by Email Address
     -p, --phone <number>          Phone number in x49999, 49999, 9999, or standard 7, 10, or 11 digit formats
     -D, --department <value>      Department to which people belong
-    -e, --employee                Staff and Faculty only. No Students
+    -e, --employee                Staff and Faculty only
+    -s, --student                 Students only
     -P, --delivery-point <value>  Delivery point type of results, (gmail|o365|es|hs|exchange|other) (other = anything but gmail, o365, exchange, hs, or es)
     --raw                         Display as pretty JSON with LDAP headers
     -j, --json                    Display as JSON instead of pretty text

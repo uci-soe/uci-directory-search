@@ -326,6 +326,28 @@ describe('directory search', function () {
       done();
     });
   });
+  it('should filter by student', function (done) {
+    this.timeout(4000);
+
+
+    cmd += ` --json --student rhett`;
+    exec(cmd, function (error, stdout, stderr) {
+      assert(!error);
+
+      let data = JSON.parse(stdout);
+
+      assert.equal(
+        data.length,
+        data
+          .filter(i => i.student)
+          .length
+        ,
+        `all people in results should be students`
+      );
+
+      done();
+    });
+  });
 
   it('should output in raw LDAP', function (done) {
     this.timeout(4000);
@@ -419,7 +441,7 @@ describe('directory search', function () {
       csv.parse(stdout, function (err, lines) {
         assert(!err, 'output text should be parse-able csv');
         assert(lines.map, 'parsed csv data should be an array');
-        assert.equal(2, lines.length, '--ucinetid should only have 1 result plus 1 row headers')
+        assert.equal(2, lines.length, '--ucinetid should only have 1 result plus 1 row headers');
 
         done();
       });
@@ -430,7 +452,7 @@ describe('directory search', function () {
   it('should limit returned results', function (done) {
     this.timeout(6000);
 
-    cmd += ` --json --limit 1 --phone 5118`;
+    cmd += ` --json --limit 1 --name rhett`;
     exec(cmd, function (error, stdout, stderr) {
       assert(!error);
 
@@ -443,7 +465,7 @@ describe('directory search', function () {
   it('should skip returned results', function (done) {
     this.timeout(6000);
 
-    cmd += ` --json --phone 5118 --limit 5`;
+    cmd += ` --json --name rhett --limit 2`;
     exec(cmd, function (error, full, stderr) {
       assert(!error);
 

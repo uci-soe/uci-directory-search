@@ -46,7 +46,8 @@ program
   .option('-p, --phone <number>', 'Phone number in x49999, 49999, 9999, or standard 7, 10, or 11 digit formats', parsers.phone, null)
   // .option('-r, --room <number>', 'Room number in format <TBD??>', null)
   .option('-D, --department <value>', 'Department to which people belong', parsers.ucfirst, null)
-  .option('-e, --employee', 'Staff and Faculty only. No Students', false)
+  .option('-e, --employee', 'Staff and Faculty only', false)
+  .option('-s, --student', 'Students only', false)
   .option('-P, --delivery-point <value>', 'Delivery point type of results, (gmail|o365|es|hs|exchange|other) (other = anything but gmail, o365, exchange, hs, or es)', parseDeliveryPoint, null)
 
   // outputs
@@ -78,6 +79,7 @@ var options = {
   // room:          program.room,
   department:    program.department,
   employee:      program.employee,
+  student:       program.student,
   deliveryPoint: program.deliveryPoint,
   output:        {
     csv:        program.csv,
@@ -102,10 +104,11 @@ if (
   // && !options.room
   && !options.department
   && !options.employee
+  && !options.student
   && !options.deliveryPoint
 ) {
   program.log.error('No search criteria given.');
-  program.log.error('Must include name, ucinetid, campusid, phone, email, title, department, employee, deliveryPoint');
+  program.log.error('Must include name, ucinetid, campusid, phone, email, title, department, employee, student, deliveryPoint');
   program.outputHelp();
   process.exit(1);
 
