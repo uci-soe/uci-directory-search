@@ -326,6 +326,28 @@ describe('directory search', function () {
       done();
     });
   });
+  it('should filter by student', function (done) {
+    this.timeout(4000);
+
+
+    cmd += ` --json --student rhett`;
+    exec(cmd, function (error, stdout, stderr) {
+      assert(!error);
+
+      let data = JSON.parse(stdout);
+
+      assert.equal(
+        data.length,
+        data
+          .filter(i => i.student)
+          .length
+        ,
+        `all people in results should be students`
+      );
+
+      done();
+    });
+  });
 
   it('should output in raw LDAP', function (done) {
     this.timeout(4000);
