@@ -419,7 +419,7 @@ describe('directory search', function () {
       csv.parse(stdout, function (err, lines) {
         assert(!err, 'output text should be parse-able csv');
         assert(lines.map, 'parsed csv data should be an array');
-        assert.equal(2, lines.length, '--ucinetid should only have 1 result plus 1 row headers')
+        assert.equal(2, lines.length, '--ucinetid should only have 1 result plus 1 row headers');
 
         done();
       });
