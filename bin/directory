@@ -120,17 +120,17 @@ if (
 
     } else {
 
-      if (options.output.raw || options.output.jsonPretty) { // todo: here I am: not working
-        done(JSON.stringify(res, null, 2));
-      } else if (options.output.json) {
-        done(JSON.stringify(res));
-      } else if (options.output.csv) {
+      if (options.output.csv) {
         csvStringify(res, {header: options.output.csvHeaders}, (err, csvStr) => {
           if (err) {
             return logErr(err, program.log.error);
           }
           done(csvStr);
         });
+      } else if (options.output.raw || options.output.jsonPretty) { // todo: here I am: not working
+        done(JSON.stringify(res, null, 2));
+      } else if (options.output.json) {
+        done(JSON.stringify(res));
       } else { // pretty print
         done(prettyFormat(res));
       }
