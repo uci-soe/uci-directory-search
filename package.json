@@ -31,7 +31,7 @@
     "update-notifier": "^1.0.0"
   },
   "devDependencies": {
-    "mocha": "^2.5.3",
-    "publish-please": "^2.1.4"
+    "mocha": "^5.2.0",
+    "publish-please": "^5.4.3"
   }
 }
