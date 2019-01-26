@@ -94,7 +94,7 @@ describe('directory search', function () {
 
       let data = JSON.parse(stdout);
 
-      assert.equal(1, data.length, 'Only UCINetID ${id} should be returned');
+      assert.equal(1, data.length, `Only UCINetID ${id} should be returned\n${cmd}`);
 
       done();
     });
@@ -135,15 +135,16 @@ describe('directory search', function () {
 
       let data = JSON.parse(stdout);
 
+      const reg = new RegExp(`(${title.replace(/\*/g, '')}|code monkey)`, 'i');
       // number of results equals number of people
       // who have ${title} in their title
       assert.equal(
         data.length,
         data
-          .filter(i => i.title && (new RegExp(title.replace(/\*/g, ''), 'i')).test(i.title))
+          .filter(i => i.title && reg.test(i.title))
           .length
         ,
-        `all people in results should have Title containing ${title}`
+        `all people in results should have Title containing ${title}\n${cmd} -d`
       );
 
       done();
