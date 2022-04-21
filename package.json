@@ -24,7 +24,7 @@
   "bugs": "https://github.com/uci-soe/uci-directory-search/issues",
   "dependencies": {
     "autocmdr": "0.0.8",
-    "chalk": "latest",
+    "chalk": "^4",
     "commander": "^2.9.0",
     "csv": "^1.1.0",
     "uci-ldap-search": "^1.0.1",
